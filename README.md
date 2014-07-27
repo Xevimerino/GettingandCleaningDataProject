@@ -39,11 +39,17 @@ This is the file containing a tidy data set, is written by the "run_analysis.R" 
 
 
   2.1 Check that you have a running internet connection
+  
   2.2 Run the script "run_analysis.R"
+  
     2.2.1 This script was created using 
+    
       R x64 v3.1.0
+      
       RStudio v0.98.977
+      
       package: reshape2 v1.4
+      
   2.3 The output of the file will be the "TidyData.csv" file.
   
 ----------------------------
@@ -91,9 +97,7 @@ This is the file containing a tidy data set, is written by the "run_analysis.R" 
 4.2 Data Set Information:
 
     The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person     performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a            smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, 3-axial linear            acceleration and 3-axial angular velocity at a constant rate of 50Hz was captured. The experiments were                  video-recorded to label the data manually. 
-
     The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for           generating the training data and 30% the test data.
-
     The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in        fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which     has gravitational and body motion components, was separated using a Butterworth low-pass filter into body                acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a          filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating         variables from the time and frequency domain.  
 
   
