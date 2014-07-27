@@ -104,4 +104,8 @@ WALKING_group<-cbind(Activity,WALKING_group)
 final<-rbind(LAYING_group,SITTING_group,STANDING_group,WALKING_D_group,WALKING_U_group,WALKING_group)
 
 #The archive to be submitted is created
+<<<<<<< HEAD
 write.table(final,"TidyData.txt",row.names=FALSE)
+=======
+write.table(final,"TidyData.txt",row.names=FALSE)
+>>>>>>> origin/master
