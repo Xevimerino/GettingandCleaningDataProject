@@ -62,6 +62,8 @@ colnames(merged2)<-sub("Gyro","Gyroscope",names(merged2))
 install.packages("reshape2")
 library(reshape2)
 
+#Subsetting the data for each activity and calculating the mean of each variable
+#activity wise 
 merged3<-merged2[merged2$ActivityName=="LAYING",]
 melted<-melt(merged3, id="Subject", measure.vars=c(3:68))
 LAYING_group<-dcast(melted, Subject~variable,mean)
@@ -98,5 +100,8 @@ WALKING_group<-dcast(melted, Subject~variable,mean)
 Activity<-rep("WALKING",30)
 WALKING_group<-cbind(Activity,WALKING_group)
 
+#The diferent tables for each activity are combined in one table
 final<-rbind(LAYING_group,SITTING_group,STANDING_group,WALKING_D_group,WALKING_U_group,WALKING_group)
+
+#The archive to be submitted is created
 write.csv(final,"TidyData.csv",row.names=FALSE)
