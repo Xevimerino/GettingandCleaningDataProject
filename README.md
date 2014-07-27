@@ -6,9 +6,13 @@ GettingandCleaningDataProject
 -----------------------------
 
   a."getdata-projectfiles-UCI HAR Dataset.zip"
+  
   b."./Data" folder
+  
   c."run_analysis.R"
+  
   d."TidyData.csv"
+
 
 a."getdata-projectfiles-UCI HAR Dataset.zip"
 
@@ -36,6 +40,10 @@ This is the file containing a tidy data set, is written by the "run_analysis.R" 
 
   2.1 Check that you have a running internet connection
   2.2 Run the script "run_analysis.R"
+    2.2.1 This script was created using 
+      R x64 v3.1.0
+      RStudio v0.98.977
+      package: reshape2 v1.4
   2.3 The output of the file will be the "TidyData.csv" file.
   
 ----------------------------
