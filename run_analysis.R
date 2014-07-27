@@ -1,9 +1,8 @@
-file.exists("getdata-projectfiles-UCI HAR Dataset.zip")
-#Will check if the file has been downloaded if no then message saying no file
-
-#If file exists then create a folder where to put all data and unzip
-unzip("getdata-projectfiles-UCI HAR Dataset.zip", exdir="./Data")
-
+#Will check if the file has been downloaded if doesn't exist message saying no file
+if(file.exists("getdata-projectfiles-UCI HAR Dataset.zip"))
+         {unzip("getdata-projectfiles-UCI HAR Dataset.zip", exdir="./Data")}
+if(!file.exists("getdata-projectfiles-UCI HAR Dataset.zip"))
+          {print("download file getdata-projectfiles-UCI HAR Dataset.zip and place it into working directory")}
 #This command might be useful if later is it deemed important to have data on diferent folders
 ##list<-unzip("getdata-projectfiles-UCI HAR Dataset.zip", list=TRUE, exdir="./Data") #Maybe not needed
 
@@ -59,45 +58,46 @@ colnames(merged2)<-sub("fB","FrequencyB",names(merged2))
 colnames(merged2)<-sub("fG","FrequencyG",names(merged2))
 colnames(merged2)<-sub("std","Std",names(merged2))
 colnames(merged2)<-sub("mean","Mean",names(merged2))
-
+colnames(merged2)<-sub("Acc","Accelerometer",names(merged2))
+colnames(merged2)<-sub("Gyro","Gyroscope",names(merged2))
 
 #Part 5 of the assignement
 library(reshape2)
-merged4<-merged2[merged2$ActivityName=="LAYING",]
-melted<-melt(merged4, id="Subject", measure.vars=c(3:68))
+merged3<-merged2[merged2$ActivityName=="LAYING",]
+melted<-melt(merged3, id="Subject", measure.vars=c(3:68))
 LAYING_group<-dcast(melted, Subject~variable,mean)
 Activity<-rep("LAYING",30)
 LAYING_group<-cbind(Activity,LAYING_group)
 
-merged4<-merged2[merged2$ActivityName=="STANDING",]
-melted<-melt(merged4, id="Subject", measure.vars=c(3:68))
+merged3<-merged2[merged2$ActivityName=="STANDING",]
+melted<-melt(merged3, id="Subject", measure.vars=c(3:68))
 STANDING_group<-dcast(melted, Subject~variable,mean)
 Activity<-rep("STANDING",30)
 STANDING_group<-cbind(Activity,STANDING_group)
 
-merged4<-merged2[merged2$ActivityName=="SITTING",]
-melted<-melt(merged4, id="Subject", measure.vars=c(3:68))
+merged3<-merged2[merged2$ActivityName=="SITTING",]
+melted<-melt(merged3, id="Subject", measure.vars=c(3:68))
 SITTING_group<-dcast(melted, Subject~variable,mean)
 Activity<-rep("SITTING",30)
 SITTING_group<-cbind(Activity,SITTING_group)
 
-merged4<-merged2[merged2$ActivityName=="WALKING_DOWNSTAIRS",]
-melted<-melt(merged4, id="Subject", measure.vars=c(3:68))
+merged3<-merged2[merged2$ActivityName=="WALKING_DOWNSTAIRS",]
+melted<-melt(merged3, id="Subject", measure.vars=c(3:68))
 WALKING_D_group<-dcast(melted, Subject~variable,mean)
 Activity<-rep("WALKING_DOWNSTAIRS",30)
 WALKING_D_group<-cbind(Activity,WALKING_D_group)
 
-merged4<-merged2[merged2$ActivityName=="WALKING_UPSTAIRS",]
-melted<-melt(merged4, id="Subject", measure.vars=c(3:68))
+merged3<-merged2[merged2$ActivityName=="WALKING_UPSTAIRS",]
+melted<-melt(merged3, id="Subject", measure.vars=c(3:68))
 WALKING_U_group<-dcast(melted, Subject~variable,mean)
 Activity<-rep("WALKING_UPSTAIRS",30)
 WALKING_U_group<-cbind(Activity,WALKING_U_group)
 
-merged4<-merged2[merged2$ActivityName=="WALKING",]
-melted<-melt(merged4, id="Subject", measure.vars=c(3:68))
+merged3<-merged2[merged2$ActivityName=="WALKING",]
+melted<-melt(merged3, id="Subject", measure.vars=c(3:68))
 WALKING_group<-dcast(melted, Subject~variable,mean)
 Activity<-rep("WALKING",30)
 WALKING_group<-cbind(Activity,WALKING_group)
 
 final<-rbind(LAYING_group,SITTING_group,STANDING_group,WALKING_D_group,WALKING_U_group,WALKING_group)
-write.csv(final,"final.csv")
+write.csv(final,"TidyData.csv")
