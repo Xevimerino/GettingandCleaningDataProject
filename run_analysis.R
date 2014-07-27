@@ -1,10 +1,6 @@
-#Will check if the file has been downloaded if doesn't exist message saying no file
-if(file.exists("getdata-projectfiles-UCI HAR Dataset.zip"))
-         {unzip("getdata-projectfiles-UCI HAR Dataset.zip", exdir="./Data")}
-if(!file.exists("getdata-projectfiles-UCI HAR Dataset.zip"))
-          {print("download file getdata-projectfiles-UCI HAR Dataset.zip and place it into working directory")}
-#This command might be useful if later is it deemed important to have data on diferent folders
-##list<-unzip("getdata-projectfiles-UCI HAR Dataset.zip", list=TRUE, exdir="./Data") #Maybe not needed
+#Command to download and unzip the file, if a file with the same name is present it will be overwritten
+download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip","getdata-projectfiles-UCI HAR Dataset.zip")
+unzip("getdata-projectfiles-UCI HAR Dataset.zip", exdir="./Data")
 
 #Load common data for test and train
 Feature<-read.table("./Data/UCI HAR Dataset/features.txt")
@@ -24,7 +20,7 @@ Subject_train<-read.table("./Data/UCI HAR Dataset/train/subject_train.txt")
 #Created the data.table for test
 Train<-cbind(Subject_train,Y_train,X_train)
 
-#Mix both data.sets
+#Mix both data.tables
 TestandTrain<-rbind(Test,Train)
 
 #Because of the dimensions will transpose feature and get rid of the first line 
@@ -34,7 +30,8 @@ tFeature<-t(Feature); tFeature<-tFeature[2,]
 #Here we have labeled the test with the features
 colnames(TestandTrain)<-c("Subject","Activity",tFeature)
 
-#Trying to resolve step(3) renamed by me to step (2)
+#Changing the numerical values in activity to the descriptive names provided 
+#by ActivityLabels
 colnames(ActivityLabels)<-c("Activity","ActivityName")
 merged<-merge(ActivityLabels,TestandTrain,sort=FALSE)
 
@@ -61,8 +58,10 @@ colnames(merged2)<-sub("mean","Mean",names(merged2))
 colnames(merged2)<-sub("Acc","Accelerometer",names(merged2))
 colnames(merged2)<-sub("Gyro","Gyroscope",names(merged2))
 
-#Part 5 of the assignement
+#Install and load reshape2 package
+install.packages("reshape2")
 library(reshape2)
+
 merged3<-merged2[merged2$ActivityName=="LAYING",]
 melted<-melt(merged3, id="Subject", measure.vars=c(3:68))
 LAYING_group<-dcast(melted, Subject~variable,mean)
